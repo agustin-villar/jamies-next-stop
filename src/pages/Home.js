@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Form from "../components/Form";
 
 import cities from '../config/cities';
+import TripColumn from "../components/TripColumn";
 
 function getCityDetailsFromId(cities, cityId) {
     const { key, name } = cities.find(({ id }) => id === cityId);
@@ -41,8 +42,8 @@ const Home = () => {
             </header>
             <main>
                 <Form onSubmit={submitHandler}/>
-                {requestsData.map(({ name }) => (
-                    <div>{name}</div>
+                {requestsData.map(({ name, flightData, weatherData }) => (
+                    <TripColumn key={name} cityName={name} flightParams={flightData} weatherParams={weatherData} />
                 ))}
             </main>
             <footer>
