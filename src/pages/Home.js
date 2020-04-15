@@ -14,7 +14,8 @@ const Home = () => {
 
     function submitHandler(formData) {
         const { fly_from, flyTo, date_from } = formData;
-
+        // API requires a different date format than the one provided by the input
+        const formattedDate = new Date(date_from).toLocaleDateString();
         const tripsDataSet = flyTo.map((city) => {
             const { key, name } = getCityDetailsFromId(cities, city);
 
@@ -26,7 +27,7 @@ const Home = () => {
                 flightData: {
                     fly_from,
                     fly_to: city,
-                    date_from
+                    date_from: formattedDate,
                 },
             });
         });
