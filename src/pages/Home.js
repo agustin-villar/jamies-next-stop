@@ -9,7 +9,7 @@ function Home() {
                 <p>What will be your next destination?</p>
             </header>
             <main>
-                <Form/>
+                <Form onSubmit={(data) => console.log(data)}/>
             </main>
             <footer>
                 Bon voyage ! <span role="img" aria-label="wave emoji">👋</span>

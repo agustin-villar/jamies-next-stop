@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Input from "../Input";
 import MultiSelect from "../MultiSelect";
 import cities from "../../config/cities";
 
-const Form = () => (
-    <form>
-        <Input label="Flying from:" name="fly_from" onChange={(data) => console.log(data)} />
-        <MultiSelect
-            label="Flying to:"
-            name="fly_to"
-            defaultText="Select one or more cities"
-            options={cities}
-            onChange={(data) => console.log(data)}
-        />
-        <Input label="Flight date:" name="date_from" type="date" onChange={(data) => console.log(data)} />
-        <button type="submit">Search</button>
-    </form>
-);
+const Form = ({ onSubmit }) => {
+    const [flyFrom, setFlyFrom] = useState({});
+    const [flyTo, setFlyTo] = useState([]);
+    const [dateFrom, setDateFrom] = useState({});
+
+    const formData = { ...flyFrom, flyTo, ...dateFrom};
+
+    return (
+        <form onSubmit={(e) => {
+            e.preventDefault();
+            onSubmit(formData);
+        }}>
+            <Input label="Flying from:" name="fly_from" onChange={setFlyFrom} />
+            <MultiSelect
+                label="Flying to:"
+                name="fly_to"
+                defaultText="Select one or more cities"
+                options={cities}
+                onChange={setFlyTo}
+            />
+            <Input label="Flight date:" name="date_from" type="date" onChange={setDateFrom} />
+            <button type="submit">Search</button>
+        </form>
+    );
+}
 
 export default Form;
