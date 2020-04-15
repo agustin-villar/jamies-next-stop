@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+// Get the values of the checked options in an array
 function getCheckedOptions(options, option, addOption) {
     if (addOption && !options.includes(option)) {
         return [option, ...options];
@@ -13,6 +14,7 @@ function getCheckedOptions(options, option, addOption) {
     return [...options];
 }
 
+// Get a string containing the names of the options checked
 function getCheckedOptionsLabel(options, checkedOptions) {
     return checkedOptions.map((acronym) => options.find(({ id }) => acronym === id).name).join(', ');
 }
