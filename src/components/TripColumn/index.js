@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import 'styled-components/macro';
 import axios from 'axios';
-import {WEATHER_API_URL, WEATHER_API_KEY, PROXIED_FLIGHTS_URL} from '../../config/apisConfig';
+
 import WeatherDetail from '../WeatherDetail';
 import FlightDetail from "../FlightDetail";
+import {WEATHER_API_URL, WEATHER_API_KEY, PROXIED_FLIGHTS_URL} from '../../config/apisConfig';
+import styles from "./styles";
 
 const TripColumn = ({ cityName, weatherParams, flightParams }) => {
     const [weatherHeadline, setWeatherHeadline] = useState('');
@@ -44,15 +47,15 @@ const TripColumn = ({ cityName, weatherParams, flightParams }) => {
     }, [weatherParams, flightParams]);
 
     return (
-        <div>
-            <h2>{cityName}</h2>
-            <ol>
+        <div css={styles}>
+            <h2 className="trip-column__heading">{cityName}</h2>
+            <ol className="trip-column__weather-list">
                 {weatherData.map(({ Date, Temperature: { Maximum: { Value: max }, Minimum: { Value: min } } }) => (
                     <WeatherDetail key={Date} date={Date} min={min} max={max} />
                 ))}
             </ol>
-            <p>{weatherHeadline}</p>
-            <hr />
+            <p className="trip-column__weather-headline">{weatherHeadline}</p>
+            <hr className="trip-column__hr" />
             <ol>
                 {flightsData.map(({ id, fly_duration, price, deep_link, airlines }) => (
                     <FlightDetail key={id} price={price} airlines={airlines} flyDuration={fly_duration} link={deep_link} />

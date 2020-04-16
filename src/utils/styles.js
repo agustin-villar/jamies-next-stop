@@ -6,6 +6,7 @@ const breakpoints = {
 
 const fontSizes = {
     heading: '3.5rem',
+    headline: '2.4rem',
     title: '1.8rem',
     bodySize: '1.6rem',
     caption: '1.4rem',

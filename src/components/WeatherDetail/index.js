@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import 'styled-components/macro';
+
+import styles from "./styles";
 
 const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -8,11 +11,10 @@ const WeatherDetail = ({ date, min, max }) => {
     const dayName = days[new Date(date).getDay()];
 
     return (
-        <li>
-            <h3>{dayName}</h3>
-            <p>
-                <span>min: {min}</span>
-                <span>max: {max}</span>
+        <li css={styles}>
+            <h3 className="weather-detail__headline">{dayName}</h3>
+            <p className="weather-detail__temperatures">
+                <span>{min}°</span> - <span>{max}°</span>
             </p>
         </li>
     );
