@@ -37,6 +37,10 @@ const styles = css`
         padding: 0 ${getSpacing(2)};
         margin-bottom: ${getSpacing(3)};
     }
+    
+    .trip-column__no-results {
+        padding: ${getSpacing(4)} ${getSpacing(2)};
+    }
 `;
 
 export default styles;

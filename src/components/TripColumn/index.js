@@ -57,9 +57,17 @@ const TripColumn = ({ cityName, weatherParams, flightParams }) => {
             <p className="trip-column__weather-headline">{weatherHeadline}</p>
             <hr className="trip-column__hr" />
             <ol>
-                {flightsData.map(({ id, fly_duration, price, deep_link, airlines }) => (
-                    <FlightDetail key={id} price={price} airlines={airlines} flyDuration={fly_duration} link={deep_link} />
-                ))}
+                {flightsData.length > 0 ?
+                    (
+                        flightsData.map(({ id, fly_duration, price, deep_link, airlines }) => (
+                            <FlightDetail key={id} price={price} airlines={airlines} flyDuration={fly_duration} link={deep_link} />
+                        ))
+                    ) : (
+                        <p className="trip-column__no-results">
+                            No flights found under this criteria, please check the information you've entered.
+                        </p>
+                    )
+                }
             </ol>
         </div>
     );
