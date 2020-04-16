@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import {WEATHER_API_URL, WEATHER_API_KEY, PROXIED_FLIGHTS_URL} from "../../config/apisConfig";
+import {WEATHER_API_URL, WEATHER_API_KEY, PROXIED_FLIGHTS_URL} from '../../config/apisConfig';
+import WeatherDetail from '../WeatherDetail';
 
 const TripColumn = ({ cityName, weatherParams, flightParams }) => {
+    const [weatherHeadline, setWeatherHeadline] = useState('');
     const [weatherData, setWeatherData] = useState([]);
     const [flightsData, setFlightsData] = useState([]);
 
@@ -34,6 +36,7 @@ const TripColumn = ({ cityName, weatherParams, flightParams }) => {
                 const { Headline: { Text }, DailyForecasts } = weatherResponse.data;
                 const { data: flightsData } = flightsResponse.data;
 
+                setWeatherHeadline(Text);
                 setWeatherData(DailyForecasts);
                 setFlightsData(flightsData);
             }));
@@ -43,16 +46,16 @@ const TripColumn = ({ cityName, weatherParams, flightParams }) => {
         <div>
             <h2>{cityName}</h2>
             <ol>
-                {weatherData.map(({ Date, Temperature }) => (
-                    <li>{Date}</li>
+                {weatherData.map(({ Date, Temperature: { Maximum: { Value: max }, Minimum: { Value: min } } }) => (
+                    <WeatherDetail key={Date} date={Date} min={min} max={max} />
                 ))}
             </ol>
+            <p>{weatherHeadline}</p>
             <hr />
             <ol>
-                <li>Mon</li>
-                <li>Mon</li>
-                <li>Mon</li>
-                <li>Mon</li>
+                {flightsData.map(({ fly_duration }) => (
+                    <li>{fly_duration}</li>
+                ))}
             </ol>
         </div>
     );
