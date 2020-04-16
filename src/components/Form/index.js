@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import 'styled-components/macro';
 
 import LocationInput from "../LocationInput";
 import Input from "../Input";
 import MultiSelect from "../MultiSelect";
 import cities from "../../config/cities";
+import styles from "./styles";
 
 const Form = ({ onSubmit }) => {
     const [flyFrom, setFlyFrom] = useState({});
@@ -13,7 +15,7 @@ const Form = ({ onSubmit }) => {
     const formData = { ...flyFrom, flyTo, ...dateFrom};
 
     return (
-        <form onSubmit={(e) => {
+        <form css={styles} onSubmit={(e) => {
             e.preventDefault();
             onSubmit(formData);
         }}>
@@ -26,7 +28,7 @@ const Form = ({ onSubmit }) => {
                 onChange={setFlyTo}
             />
             <Input label="Flight date:" name="date_from" type="date" onChange={setDateFrom} />
-            <button type="submit">Search</button>
+            <button className="form__submit-button" type="submit">Search</button>
         </form>
     );
 }
