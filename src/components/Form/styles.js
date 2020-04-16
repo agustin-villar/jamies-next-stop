@@ -7,7 +7,7 @@ const styles = css`
     margin-bottom: ${getSpacing(5)};
     margin-left: auto;
     margin-right: auto;
-    max-width: 500px;
+    max-width: 400px;
 
     .form__submit-button {
         background-color: ${colors.blue};
