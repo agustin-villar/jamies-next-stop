@@ -30,4 +30,20 @@ const styles = css`
     }
 `;
 
-export default styles;
+const gridContainerStyles = ({ citiesCount }) => {
+    let templateColumns = '';
+
+    for (let i = 0; i < citiesCount; i += 1) {
+        templateColumns += '1fr ';
+    }
+
+    return css`
+        @media (min-width: ${breakpoints.tabletWidth}) {
+            display: grid;
+            grid-template-columns: ${templateColumns};
+            grid-column-gap: ${getSpacing(3)};
+        }
+    `;
+}
+
+export { styles as default, gridContainerStyles };

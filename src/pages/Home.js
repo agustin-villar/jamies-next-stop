@@ -4,7 +4,7 @@ import 'styled-components/macro';
 import Form from "../components/Form";
 import TripColumn from "../components/TripColumn";
 import cities from '../config/cities';
-import styles from "./styles";
+import styles, { gridContainerStyles } from "./styles";
 
 function getCityDetailsFromId(cities, cityId) {
     const { key, name } = cities.find(({ id }) => id === cityId);
@@ -45,9 +45,11 @@ const Home = () => {
             </header>
             <main>
                 <Form onSubmit={submitHandler}/>
-                {requestsData.map(({ name, flightData, weatherData }) => (
-                    <TripColumn key={name} cityName={name} flightParams={flightData} weatherParams={weatherData} />
-                ))}
+                <div css={gridContainerStyles} citiesCount={requestsData.length}>
+                    {requestsData.map(({ name, flightData, weatherData }) => (
+                        <TripColumn key={name} cityName={name} flightParams={flightData} weatherParams={weatherData} />
+                    ))}
+                </div>
             </main>
             <footer className="home__footer">
                 Bon voyage ! <span role="img" aria-label="wave emoji">👋</span>
