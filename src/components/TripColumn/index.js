@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import {WEATHER_API_URL, WEATHER_API_KEY, PROXIED_FLIGHTS_URL} from '../../config/apisConfig';
 import WeatherDetail from '../WeatherDetail';
+import FlightDetail from "../FlightDetail";
 
 const TripColumn = ({ cityName, weatherParams, flightParams }) => {
     const [weatherHeadline, setWeatherHeadline] = useState('');
@@ -53,8 +54,8 @@ const TripColumn = ({ cityName, weatherParams, flightParams }) => {
             <p>{weatherHeadline}</p>
             <hr />
             <ol>
-                {flightsData.map(({ fly_duration }) => (
-                    <li>{fly_duration}</li>
+                {flightsData.map(({ id, fly_duration, price, deep_link, airlines }) => (
+                    <FlightDetail key={id} price={price} airlines={airlines} flyDuration={fly_duration} link={deep_link} />
                 ))}
             </ol>
         </div>
