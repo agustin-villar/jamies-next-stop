@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import Form from "../components/Form";
+import 'styled-components/macro';
 
-import cities from '../config/cities';
+import Form from "../components/Form";
 import TripColumn from "../components/TripColumn";
+import cities from '../config/cities';
+import styles from "./styles";
 
 function getCityDetailsFromId(cities, cityId) {
     const { key, name } = cities.find(({ id }) => id === cityId);
@@ -36,10 +38,10 @@ const Home = () => {
     }
 
     return (
-        <div>
-            <header>
-                <h1>Hello Jamie!</h1>
-                <p>What will be your next destination?</p>
+        <div css={styles}>
+            <header className="home__header">
+                <h1 className="home__heading">Hello Jamie!</h1>
+                <p className="home__tagline">What will be your next destination?</p>
             </header>
             <main>
                 <Form onSubmit={submitHandler}/>
@@ -47,7 +49,7 @@ const Home = () => {
                     <TripColumn key={name} cityName={name} flightParams={flightData} weatherParams={weatherData} />
                 ))}
             </main>
-            <footer>
+            <footer className="home__footer">
                 Bon voyage ! <span role="img" aria-label="wave emoji">👋</span>
             </footer>
         </div>

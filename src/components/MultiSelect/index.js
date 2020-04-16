@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import 'styled-components/macro';
+
+import styles from "./styles";
 
 // Get the values of the checked options in an array
 function getCheckedOptions(options, option, addOption) {
@@ -21,28 +24,36 @@ function getCheckedOptionsLabel(options, checkedOptions) {
 
 const MultiSelect = ({ label, name, defaultText, options, onChange }) => {
     const [checkedOptions, setCheckedOptions] = useState([]);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const currentChoice = checkedOptions.length > 0 ? getCheckedOptionsLabel(options, checkedOptions) : defaultText;
 
+    function openDropdown() {
+        setIsDropdownOpen(!isDropdownOpen);
+    }
+
     return (
-        <div>
-            <span>{label}</span>
-            <button>{currentChoice}</button>
-            {options.map(({ name: optionName, id }) => (
-                <label key={id}>
-                    <input
-                        type="checkbox"
-                        name={name}
-                        value={id}
-                        onChange={(e) => {
-                            const { target: { value, checked } } = e;
-                            const newCheckedOptions = getCheckedOptions(checkedOptions, value, checked);
-                            onChange(newCheckedOptions);
-                            setCheckedOptions(getCheckedOptions(newCheckedOptions));
-                        }}
-                    />
-                    {optionName}
-                </label>
-            ))}
+        <div css={styles} open={isDropdownOpen}>
+            <span className="multi-select__label">{label}</span>
+            <button className="multi-select__button" type="button" onClick={openDropdown}>{currentChoice}</button>
+            <div className="multi-select__dropdown">
+                {options.map(({ name: optionName, id }) => (
+                    <label className="multi-select__dropdown-item" key={id}>
+                        <input
+                            className="multi-select__input"
+                            type="checkbox"
+                            name={name}
+                            value={id}
+                            onChange={(e) => {
+                                const { target: { value, checked } } = e;
+                                const newCheckedOptions = getCheckedOptions(checkedOptions, value, checked);
+                                onChange(newCheckedOptions);
+                                setCheckedOptions(getCheckedOptions(newCheckedOptions));
+                            }}
+                        />
+                        {optionName}
+                    </label>
+                ))}
+            </div>
         </div>
     );
 }

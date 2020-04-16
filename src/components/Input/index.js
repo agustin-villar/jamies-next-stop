@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import 'styled-components/macro';
+
+import styles from "./styles";
 
 const Input = ({ name, label, placeholder, type, onChange }) => {
     const [inputValue, setInputValue] = useState('');
 
     return (
-        <div>
-            <label>{label}</label>
+        <div css={styles}>
+            <label className="input__label">{label}</label>
             <input
+                className="input__element"
                 name={name}
                 placeholder={placeholder}
                 type={type}
