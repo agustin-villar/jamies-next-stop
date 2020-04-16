@@ -2,8 +2,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Jamie's next stop
 
-This web application will help Jamie to find her next destination during his professional adventure. It will display 
-the weather forecast and the most economic flights available for Amsterdam, Budapest and Madrid.
+This web application will help Jamie to find her next destination during her professional adventure. It will display 
+the weather forecast and the most economic flights available for Amsterdam, Budapest and Madrid on a particular date.
 
 The app makes use of the following APIs to fetch the information:
 
