@@ -6,7 +6,7 @@ import TripColumn from "../components/TripColumn";
 
 function getCityDetailsFromId(cities, cityId) {
     const { key, name } = cities.find(({ id }) => id === cityId);
-    return { key, name};
+    return ({ key, name});
 }
 
 const Home = () => {

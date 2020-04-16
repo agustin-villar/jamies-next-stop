@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import LocationInput from "../LocationInput";
 import Input from "../Input";
 import MultiSelect from "../MultiSelect";
 import cities from "../../config/cities";
@@ -16,7 +17,7 @@ const Form = ({ onSubmit }) => {
             e.preventDefault();
             onSubmit(formData);
         }}>
-            <Input label="Flying from:" name="fly_from" onChange={setFlyFrom} />
+            <LocationInput label="Flying from:" name="fly_from" onChange={setFlyFrom} />
             <MultiSelect
                 label="Flying to:"
                 name="fly_to"
